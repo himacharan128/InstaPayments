@@ -22,7 +22,10 @@ const CheckoutPage = () => {
   }, []);
 
   const handleProceedToPayment = () => {
-    router.push('/payment');
+    router.push({
+      pathname: '/payment',
+      query: { total }
+    });
   };
 
   return (
@@ -34,3 +37,4 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
