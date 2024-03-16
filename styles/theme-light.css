@@ -1,0 +1,10 @@
+/* Light theme */
+:root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --primary: #007bff;
+    --primary-foreground: #ffffff;
+  }
+  
+  /* Additional light theme styles can be added here */
+  

@@ -1,0 +1,10 @@
+/* Dark theme */
+:root {
+    --background: #1f1f1f;
+    --foreground: #ffffff;
+    --primary: #007bff;
+    --primary-foreground: #ffffff;
+  }
+  
+  /* Additional dark theme styles can be added here */
+  
