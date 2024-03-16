@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import PaymentOptions from '../components/PaymentOptions';
+import Layout from '@/components/Layout';
 
 const PaymentPage = () => {
   const [selectedMethod, setSelectedMethod] = useState('');
@@ -31,16 +32,19 @@ const PaymentPage = () => {
   };
 
   return (
-    <div>
-      <h1>Payment</h1>
-      <PaymentOptions
-        paymentMethods={paymentMethods}
-        selectedMethod={selectedMethod}
-        onSelect={handleSelectPaymentMethod}
-        total={total}
-        handleMakePayment={handleMakePayment}
-      />
-    </div>
+    <Layout>    
+      <div>
+        <h1 style={{ textAlign: 'center' }}>Payment</h1>
+        <hr style={{ margin: '20px auto', width: '50%' }}/>
+        <PaymentOptions
+          paymentMethods={paymentMethods}
+          selectedMethod={selectedMethod}
+          onSelect={handleSelectPaymentMethod}
+          total={total}
+          handleMakePayment={handleMakePayment}
+        />
+      </div>
+    </Layout> 
   );
 };
 

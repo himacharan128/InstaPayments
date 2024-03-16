@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import OrderConfirmation from '../components/OrderConfirmation';
+import Layout from '@/components/Layout';
 
 const ConfirmationPage = () => {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -16,7 +17,6 @@ const ConfirmationPage = () => {
     }
     if (products) {
       try {
-        // Parse the products data back into an array of objects
         const parsedProducts = JSON.parse(products);
         setOrderDetails(parsedProducts);
       } catch (error) {
@@ -35,9 +35,11 @@ const ConfirmationPage = () => {
   }, [router.query]);  
   
   return (
-    <div>
-      <OrderConfirmation orderDetails={orderDetails} selectedMethod={selectedMethod} status={status} total={total} />
-    </div>
+    <Layout>
+      <div>
+        <OrderConfirmation orderDetails={orderDetails} selectedMethod={selectedMethod} status={status} total={total} />
+      </div>
+    </Layout>    
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import CheckoutSummary from '../components/CheckoutSummary';
 import { fetchOrderDetails } from '../api/orderDetails';
+import Layout from '@/components/Layout';
 
 const CheckoutPage = () => {
   const [total, setTotal] = useState(0);
@@ -29,10 +30,13 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div>
-      <h1>Checkout</h1>
-      <CheckoutSummary total={total} onClick={handleProceedToPayment} products={products} />
-    </div>
+    <Layout>
+      <div>
+        <h1 style={{ textAlign: 'center' }}>Checkout</h1>
+        <hr style={{ margin: '20px auto', width: '50%' }}/>
+        <CheckoutSummary total={total} onClick={handleProceedToPayment} products={products} />
+      </div>
+    </Layout>
   );
 };
 

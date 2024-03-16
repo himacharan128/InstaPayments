@@ -3,24 +3,24 @@ import React from 'react';
 const OrderConfirmation = ({ orderDetails, selectedMethod, status, total }) => {
   return (
     <div>
-      <h2>Order Confirmation</h2>
-      <p>YOUR ORDER HAS BEEN SUCCESSFULLY PLACED !</p>
+      <h1 style={{ textAlign: 'center' }}>Order Confirmation</h1>
+      <hr style={{ margin: '20px auto', width: '50%' }} />
       <div>
-        <p>Order Details:</p>
-        <ul>
+        <h3>Order Details:</h3>
+        <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
           {orderDetails.map((product, index) => (
-            <li key={index}>
-              <p>Title: {product.title}</p>
-              <p>Price: {product.price}</p>
-              <p>Quantity: {product.quantity}</p>
-              <img src={product.image} alt={product.title} style={{ maxWidth: '100px' }} />
+            <li key={index} style={{ margin: '0 10px 10px 0', border: '1px solid #ccc' }}>
+              <div style={{ padding: '10px' }}>
+                <p>{product.title}</p>
+                <img src={product.image} alt={product.title} style={{ maxWidth: '100px' }} />
+              </div>
             </li>
           ))}
         </ul>
       </div>
-      <p>Order Total : {total}</p>
-      <p>Payment Method: {selectedMethod}</p>
-      <p>Status: {status}</p>
+      <h3>Order Total : {total}</h3>
+      <h3>Payment Method: {selectedMethod}</h3>
+      <h3>Status: {status}</h3>
     </div>
   );
 };
