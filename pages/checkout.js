@@ -24,7 +24,7 @@ const CheckoutPage = () => {
   const handleProceedToPayment = () => {
     router.push({
       pathname: '/payment',
-      query: { total }
+      query: { total, products: JSON.stringify(products) }
     });
   };
 
