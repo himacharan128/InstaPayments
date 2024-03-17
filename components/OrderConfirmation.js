@@ -1,26 +1,41 @@
 import React from 'react';
 
 const OrderConfirmation = ({ orderDetails, selectedMethod, status, total }) => {
-  return (
+  return ( 
     <div>
       <h1 style={{ textAlign: 'center' }}>Order Confirmation</h1>
       <hr style={{ margin: '20px auto', width: '50%' }} />
       <div>
-        <h3>Order Details:</h3>
-        <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-          {orderDetails.map((product, index) => (
-            <li key={index} style={{ margin: '0 10px 10px 0', border: '1px solid #ccc' }}>
-              <div style={{ padding: '10px' }}>
-                <p>{product.title}</p>
-                <img src={product.image} alt={product.title} style={{ maxWidth: '100px' }} />
-              </div>
-            </li>
-          ))}
-        </ul>
+        <h2 style={{ textAlign: 'center' }}>Order Details:</h2>
+
+        <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
+          <div style={{ textAlign: 'center', marginTop: "30px", overflowX: 'auto', whiteSpace: 'nowrap' }}>
+            <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '10px', maxWidth: '100%', overflowX: 'auto' }}>
+              {orderDetails.map((product, index) => (
+                <div key={index} style={{ flex: '0 0 auto', width: '120px', padding: '10px', marginBottom: '10px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <img src={product.image} alt={product.title} style={{ maxWidth: '100%', marginBottom: '5px' }} />
+                  <p style={{ margin: '0', fontSize: '12px' }}>{product.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+            <p style={{ flex: '1', marginRight: '10px' }}>Order Total :</p>
+            <p style={{ textAlign: 'right' }}>$ {total}</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+            <p style={{ flex: '1', marginRight: '10px' }}>Payment Method :</p>
+            <p style={{ textAlign: 'right' }}>{selectedMethod}</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+            <p style={{ flex: '1', marginRight: '10px' }}>Status:</p>
+            <p style={{ textAlign: 'right' }}>{status}</p>
+          </div>
+        </div>
       </div>
-      <h3>Order Total : {total}</h3>
-      <h3>Payment Method: {selectedMethod}</h3>
-      <h3>Status: {status}</h3>
     </div>
   );
 };

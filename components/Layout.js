@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from 'react';
 import { fetchMerchantMetadata } from '@/api/merchantMetadata';
 
@@ -20,7 +21,7 @@ const Layout = ({ children }) => {
   }, []);
 
   const style = {
-    backgroundColor: theme ? theme['--background'] : 'white',
+    backgroundColor: theme ? theme['--background'] : 'black',
     color: theme ? theme['--foreground'] : 'black',
     padding: '20px',
     borderRadius: '10px',
