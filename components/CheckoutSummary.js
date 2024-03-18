@@ -1,13 +1,22 @@
 import React from 'react';
 import { FaMapLocationDot, FaPhone } from "react-icons/fa6";
 
-const CheckoutSummary = ({ total, onClick, products }) => {
+const CheckoutSummary = ({ total, onClick, products, onIncrementQuantity, onDecrementQuantity }) => {
+
+  const handleIncrement = (index) => {
+    onIncrementQuantity(index);
+  };
+
+  const handleDecrement = (index) => {
+    onDecrementQuantity(index);
+  };
+
   return (
     <div>
       <h2 style={{ textAlign: 'center'}}>Order Summary</h2>
 {/* Location and mobile number */}
-      <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ padding:'10px',marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom:'20px'}}>
           <FaMapLocationDot style={{ width: '20px', marginRight: '10px', color: '#5076ee' }} />
           <p style={{ margin: '0', fontSize: '16px' }}>Delivery Details: 6-84, Dsnr.</p>
         </div>
@@ -17,32 +26,33 @@ const CheckoutSummary = ({ total, onClick, products }) => {
         </div>
       </div>
 {/* Order List */}
-      <div  style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
-        <div style={{ textAlign: 'center', marginTop: "30px", marginRight:"200px" }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            
-            {products.map(product => (
-              <div key={product.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', width: '500px' }}>
-                <img src={product.image} alt={product.title} style={{ width: '100px', height: 'auto', marginRight: '20px' }} />
-                <div style={{ flex: 1}}>
-                  <p style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}><strong>{product.title}</strong></p>
-                  <p>Quantity: {product.quantity}</p>
-                  <p>Price: ${product.price}</p>
-                </div>
-              </div>
-            ))}
-            
-          </div>
+<div style={{ marginBottom: '20px', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
+  <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Order List</h2>
+  {products.map((product, index) => (
+    <div key={product.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+      <img src={product.image} alt={product.title} style={{ width: '100px', height: 'auto', marginRight: '20px' }} />
+      <div style={{ flex: 1 }}>
+        <h3>{product.title}</h3>
+        <p>Price: ${product.price}</p>
+      </div>
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <p>Quantity:</p>
+          <button onClick={() => handleDecrement(index)}>-</button>
+          <span>{product.quantity}</span>
+          <button onClick={() => handleIncrement(index)}>+</button>
         </div>
       </div>
-{/* Promo Code */}
-      {/* <div style={{display:"flex" ,justifyContent: 'space-evenly'}}>
-        <h3>Promo Code</h3>
-        <input type="text" placeholder=" " style={{ border: '1px solid black' }} />
-      </div> */}
+    </div>
+  ))}
+</div>
+
+
+
+     
 {/* Order Summary */}
       <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
-        <h3 style={{ marginBottom: '10px' }}>Order Summary</h3>
+        <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>Bill Summary</h3>
 
         <div style={{ display: 'flex', justifyContent: 'space-between'}}>
           <p style={{ flex: '1', marginRight: '10px' }}>Order Amount:</p>
@@ -58,7 +68,7 @@ const CheckoutSummary = ({ total, onClick, products }) => {
         </div>
       </div>
 {/* Bottom Navigation */}
-      <div style={{  position:'fixed', bottom: '0', left: '0', width: '100%', padding: '10px', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+      <div style={{  bottom: '0', left: '0', width: '100%', padding: '20px', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
         <p style={{ margin: '0', fontSize: '1.5em' }}>Total Amount: $ {total}</p>
         <button style={{ backgroundColor: '#5076ee', fontSize: '1.5em', padding: '10px 20px', borderRadius: '5px', color: 'white' }} onClick={onClick}>Proceed to Payment</button>
       </div>
@@ -66,4 +76,5 @@ const CheckoutSummary = ({ total, onClick, products }) => {
     </div>
   );
 };
+
 export default CheckoutSummary;
