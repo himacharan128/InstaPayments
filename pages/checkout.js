@@ -1,5 +1,3 @@
-// CheckoutPage.js
-
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import CheckoutSummary from '../components/CheckoutSummary';
@@ -7,11 +5,17 @@ import { fetchOrderDetails } from '../api/orderDetails';
 import Layout from '@/components/Layout';
 
 const CheckoutPage = () => {
+  const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
   const [products, setProducts] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
     fetchOrderDetails()
       .then(data => {
         let totalPrice = 0;
@@ -22,7 +26,11 @@ const CheckoutPage = () => {
         setTotal(roundedTotal);
         setProducts(data.products);
       })
-      .catch(error => console.error('Error fetching order details:', error));
+      .catch(error => console.error('Error fetching order details:', error))
+      .finally(() => setLoading(false));
+
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleProceedToPayment = () => {
@@ -63,7 +71,19 @@ const CheckoutPage = () => {
       <div>
         <h1 style={{ textAlign: 'center' }}>Checkout</h1>
         <hr style={{ margin: '20px auto', width: '50%' }}/>
-        <CheckoutSummary total={total} onClick={handleProceedToPayment} products={products} onIncrementQuantity={handleIncrementQuantity} onDecrementQuantity={handleDecrementQuantity} />
+        {loading ? (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '200px' }}>
+            <h2>Please wait while we load your cart...</h2>
+          </div>
+        ) : (
+          <CheckoutSummary
+            total={total}
+            onClick={handleProceedToPayment}
+            products={products}
+            onIncrementQuantity={handleIncrementQuantity}
+            onDecrementQuantity={handleDecrementQuantity}
+          />
+        )}
       </div>
     </Layout>
   );

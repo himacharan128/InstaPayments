@@ -5,18 +5,24 @@ const PaymentOptions = ({ paymentMethods, selectedMethod, total,  onSelect, hand
     <div>
       <h2 style={{ textAlign: 'center'}}>Choose Payment Method</h2>
       <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
+      <div>
         {paymentMethods.map(method => (
-          <div key={method} style={{  }}>
-            <button 
-              onClick={() => onSelect(method)} 
-              style={{ 
-                backgroundColor: method === selectedMethod ? 'lightblue' : 'white',
-                border: 'none',
+          <div key={method} style={{}}>
+            <button
+              onClick={() => onSelect(method)}
+              style={{
+                // backgroundColor: method === selectedMethod ? 'lightblue' : 'white',
+                border: method === selectedMethod ? '5px solid green' : 'none',
                 cursor: 'pointer',
                 textAlign: 'center',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                padding: '20px',
+                fontSize: '1.5em',
+                borderRadius: '10px',
+                marginBottom: '5px',
+                width: '100%',
               }}
             >
               {method}
@@ -24,6 +30,10 @@ const PaymentOptions = ({ paymentMethods, selectedMethod, total,  onSelect, hand
           </div>
         ))}
       </div>
+
+      </div>
+
+
       <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', border: '2px solid white', borderRadius: '5px', padding: '10px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between'}}>
           <p style={{ flex: '1', marginRight: '10px' }}>Admin Fee:</p>
